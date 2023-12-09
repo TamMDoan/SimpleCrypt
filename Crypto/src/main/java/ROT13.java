@@ -19,7 +19,7 @@ public class ROT13  {
 
     ROT13() {
         this.cs = 'A';
-        this.cf = 'A';
+        this.cf = 'N';
         createLookUpTable();
     }
 
