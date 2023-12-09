@@ -6,16 +6,16 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Main {
-    public static String readFile(){
+    public static String readFile(String fileName){
         Caesar caesar = new Caesar('A', 'N');
         String encryptedText = "";
         try{
-            File baseFile = new File("sonnet18.txt");
+            File baseFile = new File(fileName);
             Scanner scanner = new Scanner(baseFile);
 
             while(scanner.hasNextLine()){
                 String line = scanner.nextLine();
-                encryptedText += caesar.encrypt(line) + "\n";
+                encryptedText += caesar.crypt(line) + "\n";
             }
 
         }
@@ -26,9 +26,9 @@ public class Main {
         return encryptedText;
     }
 
-    public static void writeFile(String text){
+    public static void writeFile(String text, String fileName){
         try {
-            FileWriter fileWriter = new FileWriter("sonnet18.enc");
+            FileWriter fileWriter = new FileWriter(fileName);
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.print(text);
             printWriter.close();
@@ -40,7 +40,11 @@ public class Main {
     }
 
     public static void main(String[] args){
-        String encrytypedText = readFile();
-        writeFile(encrytypedText);
+        String encrytypedText = readFile("sonnet18.txt");
+        writeFile(encrytypedText, "sonnet18.enc");
+
+        String decryptedText = readFile("sonnet18.enc");
+        writeFile(decryptedText, "sonnet18_decrypted.txt");
+
     }
 }
